@@ -4,6 +4,7 @@ export const site = {
   description: "记录真实问题、工程方案与取舍，让每一次解决都有迹可循。",
   author: "常灏",
   email: "hello@example.com",
+  github: "https://github.com/Kunstnere/tech-blog",
   nav: [
     { label: "文章", href: "/" },
     { label: "归档", href: "/archive/" },

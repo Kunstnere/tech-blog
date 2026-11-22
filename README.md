@@ -18,7 +18,7 @@ src/pages/          网站页面
 
 ### 1. 安装 Node.js
 
-本项目需要 Node.js 22 或更高版本。打开 PowerShell，执行：
+本项目需要 Node.js 22.12 或更高版本。打开 PowerShell，执行：
 
 ```powershell
 node --version
@@ -183,10 +183,18 @@ git push -u origin main
 构建配置填写：
 
 ```text
+Project name: kunstnere-tech-blog
+Production branch: main
 Framework preset: Astro
 Build command: npm run build
 Build output directory: dist
 Root directory: 留空
+```
+
+建议在 Cloudflare 的环境变量中增加：
+
+```text
+NODE_VERSION=22.20.0
 ```
 
 点击 `Save and Deploy`。第一次构建通常需要一到三分钟。
