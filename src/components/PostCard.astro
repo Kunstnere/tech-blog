@@ -1,0 +1,40 @@
+---
+import { ArrowRight, Clock3 } from "lucide-astro";
+import type { BlogPost } from "../lib/posts";
+import { formatDate, getReadingTime } from "../lib/posts";
+
+interface Props {
+  post: BlogPost;
+  index: number;
+}
+
+const { post, index } = Astro.props;
+const readingTime = getReadingTime(post.body);
+---
+
+<article class="post-card">
+  <div class="post-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</div>
+  <div class="post-card-main">
+    <div class="post-meta">
+      <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+      <span aria-hidden="true">/</span>
+      <span class="reading-time">
+        <Clock3 size={13} stroke-width={1.8} />
+        {readingTime}
+      </span>
+    </div>
+    <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+    <p>{post.data.description}</p>
+    <div class="post-card-footer">
+      <ul class="tag-list" aria-label="文章标签">
+        {post.data.tags.map((tag) => (
+          <li><a href={`/tags/${encodeURIComponent(tag)}/`}>{tag}</a></li>
+        ))}
+      </ul>
+      <a class="read-link" href={`/blog/${post.id}/`} aria-label={`阅读：${post.data.title}`}>
+        阅读文章
+        <ArrowRight size={16} stroke-width={1.8} />
+      </a>
+    </div>
+  </div>
+</article>

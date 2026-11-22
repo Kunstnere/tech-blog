@@ -1,0 +1,26 @@
+---
+import { ArrowUpRight, Rss } from "lucide-astro";
+import { site } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-title">{site.title}</p>
+      <p class="footer-note">保持好奇，记录真实发生的问题。</p>
+    </div>
+    <div class="footer-links">
+      <a href="/rss.xml">
+        <Rss size={15} stroke-width={1.8} />
+        RSS 订阅
+      </a>
+      <a href="https://github.com/" target="_blank" rel="noreferrer">
+        GitHub
+        <ArrowUpRight size={14} stroke-width={1.8} />
+      </a>
+    </div>
+    <p class="copyright">© {year} {site.author}. 保留所有权利。</p>
+  </div>
+</footer>

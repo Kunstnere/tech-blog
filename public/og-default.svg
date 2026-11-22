@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4f6f2"/>
+  <path d="M80 80h1040v470H80z" fill="none" stroke="#b9c2bb" stroke-width="2"/>
+  <path d="M80 80h150v470H80z" fill="#17211c"/>
+  <path d="M121 122h62M121 148h38M121 174h52M121 200h44" stroke="#ef8264" stroke-width="4"/>
+  <text x="310" y="260" fill="#17211c" font-family="serif" font-size="72" font-weight="700">常灏的技术笔记</text>
+  <text x="314" y="330" fill="#526058" font-family="sans-serif" font-size="30">记录真实问题、工程方案与取舍</text>
+  <path d="M314 390h520" stroke="#c94c2c" stroke-width="4"/>
+  <text x="314" y="440" fill="#7a867f" font-family="monospace" font-size="20" letter-spacing="4">ENGINEERING NOTES</text>
+</svg>

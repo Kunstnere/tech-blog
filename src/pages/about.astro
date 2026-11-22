@@ -1,0 +1,54 @@
+---
+import { ArrowRight, BookOpen, Code2, PenLine } from "lucide-astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="关于" description="关于常灏的技术笔记。">
+  <section class="page-header container about-header">
+    <p class="eyebrow"><span></span>ABOUT</p>
+    <h1>你好，我是常灏。</h1>
+    <p class="lead">
+      这里是我的技术笔记，用来记录开发过程中真实遇到的问题、验证过的方案，以及那些需要反复权衡的工程决定。
+    </p>
+  </section>
+
+  <section class="about-grid container">
+    <div class="about-intro">
+      <h2>关于这个博客</h2>
+      <p>
+        互联网上不缺资料，难的是找到一段有上下文、有取舍、也承认局限的经验。我想把解决问题的过程留在这里，而不是只保存最后的代码。
+      </p>
+      <p>
+        内容以工程实践为主，也可能涉及工具、阅读和职业成长。文章会尽量写清楚背景、尝试、结果和验证方式，避免只给结论。
+      </p>
+      <a class="text-link" href="/">
+        去看看文章
+        <ArrowRight size={16} stroke-width={1.8} />
+      </a>
+    </div>
+
+    <div class="principles">
+      <div class="principle">
+        <Code2 size={21} stroke-width={1.7} />
+        <div>
+          <h3>真实</h3>
+          <p>来自实际工作，不制造没有验证过的经验。</p>
+        </div>
+      </div>
+      <div class="principle">
+        <BookOpen size={21} stroke-width={1.7} />
+        <div>
+          <h3>可复现</h3>
+          <p>保留必要的上下文、步骤和关键代码。</p>
+        </div>
+      </div>
+      <div class="principle">
+        <PenLine size={21} stroke-width={1.7} />
+        <div>
+          <h3>持续修订</h3>
+          <p>认识会变化，文章也会随实践继续更新。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

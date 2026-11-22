@@ -1,0 +1,77 @@
+---
+import { Menu, Moon, Sun, X } from "lucide-astro";
+import { site } from "../data/site";
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label={`${site.title}首页`}>
+      <span class="brand-mark" aria-hidden="true">常</span>
+      <span class="brand-copy">
+        <strong>{site.shortTitle}</strong>
+        <small>ENGINEERING NOTES</small>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="主导航">
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={currentPath === item.href ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button theme-toggle" type="button" aria-label="切换深色模式">
+        <Sun class="sun-icon" size={18} stroke-width={1.8} />
+        <Moon class="moon-icon" size={18} stroke-width={1.8} />
+      </button>
+      <button
+        class="icon-button menu-toggle"
+        type="button"
+        aria-label="打开导航"
+        aria-expanded="false"
+        aria-controls="mobile-navigation"
+      >
+        <Menu class="menu-open-icon" size={20} stroke-width={1.8} />
+        <X class="menu-close-icon" size={20} stroke-width={1.8} />
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-navigation" class="mobile-nav" aria-label="移动端导航">
+    {
+      site.nav.map((item) => (
+        <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>(".theme-toggle");
+  const mobileToggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const mobileNav = document.querySelector<HTMLElement>(".mobile-nav");
+
+  toggle?.addEventListener("click", () => {
+    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = nextTheme;
+    localStorage.setItem("theme", nextTheme);
+  });
+
+  mobileToggle?.addEventListener("click", () => {
+    const isOpen = mobileToggle.getAttribute("aria-expanded") === "true";
+    mobileToggle.setAttribute("aria-expanded", String(!isOpen));
+    mobileNav?.classList.toggle("is-open", !isOpen);
+  });
+</script>

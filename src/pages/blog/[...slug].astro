@@ -1,0 +1,107 @@
+---
+import { render } from "astro:content";
+import { ArrowLeft, CalendarDays, Clock3, RefreshCw } from "lucide-astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  formatDate,
+  getPublishedPosts,
+  getReadingTime,
+  type BlogPost
+} from "../../lib/posts";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+
+  return posts.map((post, index) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      previous: posts[index + 1] ?? null,
+      next: posts[index - 1] ?? null
+    }
+  }));
+}
+
+interface Props {
+  post: BlogPost;
+  previous: BlogPost | null;
+  next: BlogPost | null;
+}
+
+const { post, previous, next } = Astro.props;
+const { Content } = await render(post);
+const readingTime = getReadingTime(post.body);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+>
+  <article class="article-shell container">
+    <a class="back-link" href="/">
+      <ArrowLeft size={16} stroke-width={1.8} />
+      返回文章列表
+    </a>
+
+    <header class="article-header">
+      <ul class="tag-list">
+        {post.data.tags.map((tag) => (
+          <li><a href={`/tags/${encodeURIComponent(tag)}/`}>{tag}</a></li>
+        ))}
+      </ul>
+      <h1>{post.data.title}</h1>
+      <p class="article-description">{post.data.description}</p>
+      <div class="article-meta">
+        <span>
+          <CalendarDays size={15} stroke-width={1.8} />
+          发布于 {formatDate(post.data.pubDate)}
+        </span>
+        {
+          post.data.updatedDate && (
+            <span>
+              <RefreshCw size={15} stroke-width={1.8} />
+              更新于 {formatDate(post.data.updatedDate)}
+            </span>
+          )
+        }
+        <span>
+          <Clock3 size={15} stroke-width={1.8} />
+          {readingTime}
+        </span>
+      </div>
+    </header>
+
+    <div class="article-divider"></div>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <footer class="article-footer">
+      <p>如果这篇文章帮你解决了一个问题，欢迎通过 RSS 持续订阅。</p>
+      <a class="button button-secondary" href="/rss.xml">订阅博客</a>
+    </footer>
+
+    <nav class="post-navigation" aria-label="文章导航">
+      {
+        previous ? (
+          <a href={`/blog/${previous.id}/`}>
+            <span>上一篇</span>
+            <strong>{previous.data.title}</strong>
+          </a>
+        ) : (
+          <span></span>
+        )
+      }
+      {
+        next && (
+          <a class="next-post" href={`/blog/${next.id}/`}>
+            <span>下一篇</span>
+            <strong>{next.data.title}</strong>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</BaseLayout>
