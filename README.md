@@ -32,7 +32,7 @@ npm --version
 打开 PowerShell，进入博客目录：
 
 ```powershell
-cd "E:\常灏\博客"
+cd "E:\常灏\博客\kunstnere-tech-blog"
 npm install
 ```
 
@@ -155,7 +155,7 @@ git push
 打开 PowerShell，在博客目录执行：
 
 ```powershell
-cd "E:\常灏\博客"
+cd "E:\常灏\博客\kunstnere-tech-blog"
 git init
 git add .
 git commit -m "initial: create personal blog"
@@ -230,7 +230,7 @@ site: "https://你的域名",
 以后只需要记住四步：
 
 ```powershell
-cd "E:\常灏\博客"
+cd "E:\常灏\博客\kunstnere-tech-blog"
 npm run dev
 ```
 
