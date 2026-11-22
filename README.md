@@ -1,6 +1,6 @@
 # 常灏的技术笔记
 
-这是一个使用 Astro 搭建的静态技术博客。文章保存在 Markdown 文件中，网站发布到 Cloudflare Pages，源代码保存在 GitHub。
+这是一个使用 Astro 搭建的静态技术博客。文章保存在 Markdown 文件中，网站通过 Cloudflare Workers 发布，源代码保存在 GitHub。
 
 ## 一、认识项目
 
@@ -146,7 +146,7 @@ git push
 1. 登录 GitHub。
 2. 点击右上角 `+`，选择 `New repository`。
 3. 仓库名填写 `tech-blog`。
-4. 选择 `Private` 或 `Public`。私有仓库也可以部署到 Cloudflare Pages。
+4. 选择 `Private` 或 `Public`。私有仓库也可以部署到 Cloudflare Workers。
 5. 不要勾选自动创建 README，因为本地已经有文件。
 6. 点击 `Create repository`。
 
@@ -175,20 +175,18 @@ git push -u origin main
 
 1. 登录 Cloudflare Dashboard。
 2. 进入 `Workers & Pages`。
-3. 选择 `Create`，再选择 `Pages`。
-4. 点击 `Connect to Git`。
+3. 点击 `Create application`。
+4. 选择从 Git 仓库导入。
 5. 授权 Cloudflare 访问 GitHub，并选择 `tech-blog` 仓库。
-6. 点击 `Begin setup`。
 
 构建配置填写：
 
 ```text
 Project name: kunstnere-tech-blog
 Production branch: main
-Framework preset: Astro
 Build command: npm run build
-Build output directory: dist
-Root directory: 留空
+Deploy command: npx wrangler deploy
+Preview command: npx wrangler preview
 ```
 
 建议在 Cloudflare 的环境变量中增加：
@@ -202,17 +200,17 @@ NODE_VERSION=22.20.0
 部署成功后，Cloudflare 会提供一个类似下面的免费网址：
 
 ```text
-https://tech-blog-abc.pages.dev
+https://kunstnere-tech-blog.3213209647.workers.dev
 ```
 
-以后每次执行 `git push`，Cloudflare Pages 都会自动重新构建并发布。
+以后每次执行 `git push`，Cloudflare Workers 都会自动重新构建并发布。
 
 ## 五、绑定自己的域名
 
 免费网址适合测试，正式运营建议购买域名。
 
 1. 在域名服务商购买域名，例如 `yourname.com`。
-2. 在 Cloudflare Pages 项目中选择 `Custom domains`。
+2. 在 Cloudflare Workers 项目中选择 `Settings`，再进入 `Domains & Routes`。
 3. 点击 `Set up a custom domain`。
 4. 按提示添加域名。
 5. 如果域名使用 Cloudflare DNS，通常可以自动配置；否则按提示添加 CNAME 记录。
@@ -266,4 +264,4 @@ npm run build
 
 ### 发布后页面没有更新
 
-打开 Cloudflare Pages 项目的 `Deployments` 页面，确认最新部署已经成功。
+打开 Cloudflare Workers 项目的部署记录，确认最新部署已经成功。

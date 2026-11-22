@@ -46,11 +46,11 @@ draft: false
 文章：Markdown
 框架：Astro
 代码托管：GitHub
-网站部署：Cloudflare Pages
+网站部署：Cloudflare Workers
 域名：自己的独立域名
 ```
 
-这套组合的分工很清楚：Markdown 保存内容，Astro 把内容生成静态网页，GitHub 保存版本，Cloudflare Pages 负责发布。
+这套组合的分工很清楚：Markdown 保存内容，Astro 把内容生成静态网页，GitHub 保存版本，Cloudflare Workers 负责发布。
 
 ## 为什么选择 Astro
 
@@ -81,7 +81,7 @@ Hugo 也是很好的选择，构建速度更快；WordPress 的编辑体验更�
   └─ 生成固定网址
 
 推送代码到 GitHub
-  └─ Cloudflare Pages 自动构建并发布
+  └─ Cloudflare Workers 自动构建并发布
 ```
 
 这也是静态博客容易维护的原因：没有数据库，没有在线后台，没有需要长期关注的服务器进程。
@@ -95,7 +95,7 @@ Hugo 也是很好的选择，构建速度更快；WordPress 的编辑体验更�
 3. 用 Markdown 写正文；
 4. 在本地预览并检查排版；
 5. 提交到 Git 并推送到 GitHub；
-6. Cloudflare Pages 自动部署新版本。
+6. Cloudflare Workers 自动部署新版本。
 
 文章发布以后，标题、摘要、文章列表、标签页和 RSS 都会从同一份 Markdown 内容生成。
 
